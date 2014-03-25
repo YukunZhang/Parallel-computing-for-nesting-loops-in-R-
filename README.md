@@ -60,6 +60,7 @@ K[i,]=apply(P,2,mean)
 Q[i,]=c(K[i,],l)
 }
 stopCluster(cl)
+
  To do parallel computing, first we need to initialize the slave processes by "cl<-makeCluster(2)", the slave number depends on your system configuration. Then I use "registerDoSNOW" function to register the SNOW parallel backend with the “foreach” package. At the end of the code, we need to shut down the cluster and clean up any remaining connections between machines by using "stopCluster(cl)".
 
 
