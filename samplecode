@@ -1,34 +1,46 @@
 rm(list = ls(all = TRUE))
 
+
+#non-parallel code#
+S=matrix(0,5,1)
+A=matrix(0,5,1)
+Q=matrix(0,3,3)
+for (i in 1:3)
+{
+r=i+3
+for (m in 1:5)    
+  {
+S[m,]=m^2
+A[m,]=m+r
+   }
+l=i^2
+s=apply(S,2,mean)
+a=apply(A,2,mean)
+Q[i,]=c(s,a,l)
+}
+
+
+#parallel version#
 library(doSNOW)
 library(foreach)
-S=matrix(0,5,2)
+S=matrix(0,5,1)
 A=matrix(0,5,1)
-P=matrix(0,5,3)
-T=matrix(0,5,3)
-Q=matrix(0,3,3)
+P=matrix(0,5,2)
 K=matrix(0,3,2)
+Q=matrix(0,3,3)
 
-cl<-makeCluster(3) #change the 2 to your number of CPU cores
+cl<-makeCluster(2)  #change the 2 to your number of CPU cores
 registerDoSNOW(cl)
 
-#A=function(n)
-#{x=n*3
-#h=x*n
-#return(c(h,x))}
-
-Q=foreach (i=1:3,.combine='rbind',.packages=c("doSNOW","foreach")) %dopar%{ 
+Q=foreach (i=1:3,.combine='rbind',.packages=c("doSNOW","foreach")) %dopar%{
 r=i+3
-P=foreach(m=1:5,.combine='rbind',.packages=c("doSNOW","foreach")) %dopar% {
- #   A(n)  }
-
-S[m,]=c(m,m^2)
-A[m,]=m+1
-#as.matrix(cbind(S,A))}
+P=foreach(m=1:5,.combine='rbind') %dopar% {
+S[m,]=m^2
+A[m,]=m+r
 c(S[m,],A[m,])
 }
 l=i^2
-K[i,]=P[i,1:2]
+K[i,]=apply(P,2,mean)
 Q[i,]=c(K[i,],l)
 }
 stopCluster(cl)
