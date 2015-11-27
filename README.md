@@ -1,6 +1,6 @@
 Parallel-computing-for-nesting-loops-in-R-
 ==========================================
- R is widely used around the world by researchers. I am working on my master's thesis and using R to do simulation. It took 3 days to run 50 times simulations using my code. I was tired of waiting several days until getting my updated results which still need to be improved. Thus I am trying to embed parallel computing in the code. 
+ R is widely used around the world by researchers. I am working on my master's thesis and using R to do simulation. It took 3 days to run 50 times simulations using my code. I was tired of waiting several days until getting my updated results which still need to be improved. Thus I am trying to embed parallel computing in the code.
    Nowadays, we have more than one cores in our computers and we also have servers in our research institutes. Why don't we let more cores work on our task simultaneously?  Parallel computing is the form of computation that can divide our large problems to smaller ones which are then solved in parallel in different cores/processors. There are several useful R packages available to help us saving computation time: "multicore", "snow", "parallel","doSNOW", "foreach",etc..
 Here are some useful links regarding to these packages:
 http://homepage.stat.uiowa.edu/~luke/talks/uiowa03.pdf
@@ -83,3 +83,5 @@ Reference:
 1. http://cran.r-project.org/web/packages/foreach/foreach.pdf
 2. http://cran.r-project.org/web/packages/foreach/vignettes/foreach.pdf
 3. http://cran.r-project.org/web/packages/foreach/vignettes/nested.pdf
+
+----- Test Line -----
